@@ -1,5 +1,21 @@
+import RPi.GPIO as GPIO   # Library to interact with RPi GPIO port
+from time import sleep    # Library to allow us to pause (sleep)
+
+# Below is a a Python LIST used to keep track of which GPIO pins we are 
+#  watching
+# A LIST is a way of storing data.
+# Lists are ordered, changeable, and allow duplicate values.
+# The items are indexed.  That means you can ask for a specific entry.
+# They are "zero indexed" which means that the first entry is #0.  The second is #1, etc..
+# These notes were summarized from https://www.w3schools.com/python/python_lists.asp
+button_pins = [20,21,12,16]
+
+# Below sets GPIO code to use the Broadcom chip-specific numbering on the board for the pins.
 # You always have to set the mode.
 GPIO.setmode(GPIO.BCM)
+
+# This silences warnings if we didn't exit the last program properly
+GPIO.setwarnings(False)
 
 # We now iterate through each element in the LIST
 # An input pin floats between 0 and 1 if not connected to voltage
@@ -27,5 +43,7 @@ while press_count < 10:
 			press_count = press_count + 1  # Increment the press_count variable
 		sleep(0.01)  # wait 10 ms to give CPU chance to do other things
 
+# Clean up our GPIO settings
+GPIO.cleanup()
 # Final message:
 print ('Button(s) pressed 10 times.  Bye!')
