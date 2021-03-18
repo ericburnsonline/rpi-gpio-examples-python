@@ -12,11 +12,14 @@ led_pins = [17, 27, 22]
 
 # Below is a a Python LIST used to keep track of which GPIO pins we are 
 #  watching
-button_pins = [18, 12, 24, 23]
+button_pins = [20, 21, 12, 16]
 
 # Below sets GPIO code to use the Broadcom chip-specific numbering on the board for the pins.
 # You always have to set the mode.
 GPIO.setmode(GPIO.BCM)
+
+# This silences warnings if we didn't exit the last program properly
+GPIO.setwarnings(False)
 
 # We now iterate through each element in the LIST
 # An input pin floats between 0 and 1 if not connected to voltage
@@ -36,6 +39,8 @@ for led in led_pins:
         GPIO.setup(led, GPIO.OUT)
 
 button4pressed = False
+
+print('Press button 4 to exit.  1-3 to light LEDs.')
 
 while not button4pressed:
         for button in button_pins:
@@ -59,6 +64,9 @@ while not button4pressed:
                                 button4pressed = True
                         
                         sleep(0.01)  # wait 10 ms to give CPU chance to do other things
+
+# Clean up our GPIO settings
+GPIO.cleanup()
 
 # Final message:
 print ('Button 4 pressed.  Bye!')
