@@ -8,7 +8,7 @@ import random
 # GPIO based version of https://projects.raspberrypi.org/en/projects/lights-out/8
 
 def button_pressed(button, light):
-  print("You pressed button " + str(button) + " for light " + str(light) )
+	print("You pressed button " + str(button) + " for light " + str(light) )
 	GPIO.output(led_pins[light], False)
 
 
