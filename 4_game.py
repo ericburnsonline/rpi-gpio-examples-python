@@ -80,7 +80,7 @@ while waiting_for_press and game_in_progress:
 					print("Correct!")
 					score = score + 1
 				else:
-					print("Wrong - it was " + str(light))
+					print("Wrong - it was " + str(light)) + " and you pressed " + str(n)
 					game_in_progress = False	
 	waiting_for_press = True
 	GPIO.output(led_pins[light-1], False)
