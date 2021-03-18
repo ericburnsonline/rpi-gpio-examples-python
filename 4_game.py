@@ -36,7 +36,7 @@ for button in button_pins:
 # This sets them to be used as an output - we can turn voltage on and off
 for led in led_pins:
     GPIO.setup(led, GPIO.OUT)
-	GPIO.output(led, False)  #turn them all off
+    GPIO.output(led, False)  #turn them all off
 
 # Keep playing the game until game_in_progres becomes False
 game_in_progress = True
