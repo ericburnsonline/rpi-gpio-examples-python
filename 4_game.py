@@ -12,8 +12,8 @@ def button_pressed(button, light):
 	GPIO.output(led_pins[light], False)
 
 
-#led_pins = [22, 27, 17]
-led_pins = [17, 27, 22]
+led_pins = [22, 27, 17]
+#led_pins = [17, 27, 22]
 button_pins = [20, 21, 12]
 
 # Below sets GPIO code to use the Broadcom chip-specific numbering on the board for the pins.
