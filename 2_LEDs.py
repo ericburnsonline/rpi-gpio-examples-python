@@ -14,6 +14,9 @@ led_pins = [17, 27, 22]
 # You always have to set the mode.
 GPIO.setmode(GPIO.BCM)
 
+# This silences warnings if we didn't exit the last program properly
+GPIO.setwarnings(False)
+
 # We now iterate through each element in the LIST
 # This sets them to be used as an output - we can turn voltage on and off
 for led in led_pins:
@@ -31,3 +34,6 @@ while loop_count < 3:
 		GPIO.output(led, False)	# Turn this pin/LED off
 	sleep(1)
 	loop_count = loop_count + 1
+
+# Clean up our GPIO settings
+GPIO.cleanup()
