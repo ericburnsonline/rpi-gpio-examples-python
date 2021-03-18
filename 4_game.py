@@ -16,15 +16,27 @@ led_pins = [22, 27, 17]
 #led_pins = [17, 27, 22]
 button_pins = [20, 21, 12, 16]
 
+# Below sets GPIO code to use the Broadcom chip-specific numbering on the board for the pins.
+# You always have to set the mode.
 GPIO.setmode(GPIO.BCM)
+
+# This silences warnings if we didn't exit the last program properly
 GPIO.setwarnings(False)
 
-for led in led_pins:
-	GPIO.setup(led, GPIO.OUT)
-	GPIO.output(led, False)  #turn them all off
-
+# We now iterate through each element in the LIST
+# An input pin floats between 0 and 1 if not connected to voltage
+# A pull_up_down supplies voltage so that the pin is has a defined value
+#  until it is overrideen by a stronger force.
+# We do a "PUD_UP" since we will use a conection with Ground to
+#  be what the buttons do.
 for button in button_pins:
-	GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Basically setting pin to 1/TRUE
+
+# We now iterate through each element in the LIST
+# This sets them to be used as an output - we can turn voltage on and off
+for led in led_pins:
+    GPIO.setup(led, GPIO.OUT)
+	GPIO.output(led, False)  #turn them all off
 
 # Keep playing the game until game_in_progres becomes False
 game_in_progress = True
@@ -33,6 +45,7 @@ score = 0
 fastest_time = 99
 
 waiting_for_press = True
+
 while waiting_for_press and game_in_progress:
 	waiting_for_press = True
 	print('Get Ready!')
@@ -49,11 +62,11 @@ while waiting_for_press and game_in_progress:
 		now = time()
 		# We watch the buttons.
 		for button in button_pins:
-			input_state = GPIO.input(button) # What state is the button in?
+			input_state = GPIO.input(button)    # What state is the button in?
 			n = button_pins.index(button) + 1	# List is zero indexed.
-  						# So the first button is position 0
-			if input_state == False:  # Becomes False if pin connected 
-        				# with Ground/button pressed
+  						                        # So the first button is position 0
+			if input_state == False:    # Becomes False if pin connected 
+        				                # with Ground/button pressed
 				waiting_for_press = False
 				time_taken = now - start
 				if (time_taken < fastest_time):
