@@ -12,8 +12,8 @@ def button_pressed(button, light):
 	GPIO.output(led_pins[light], False)
 
 
-led_pins = [22, 27, 17]
-#led_pins = [17, 27, 22]
+#led_pins = [22, 27, 17]
+led_pins = [17, 27, 22]
 button_pins = [20, 21, 12, 16]
 
 # Below sets GPIO code to use the Broadcom chip-specific numbering on the board for the pins.
@@ -91,11 +91,9 @@ while waiting_for_press and game_in_progress:
 count = 0
 while count < 3:
 	for led in led_pins:
-		GPIO.setup(led, GPIO.OUT)
 		GPIO.output(led, True)  #turn them all off
 	sleep(.5)
 	for led in led_pins:
-		GPIO.setup(led, GPIO.OUT)
 		GPIO.output(led, False)  #turn them all off
 	sleep(.2)
 	count = count + 1
